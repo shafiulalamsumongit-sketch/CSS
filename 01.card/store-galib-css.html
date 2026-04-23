@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>store.galib.dev — CSS Version</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --border: #e2ddd6;
+  --text-primary: #1a1714;
+  --text-secondary: #6b6560;
+  --text-muted: #a09890;
+  --accent-blue: #2563eb;
+  --accent-green: #16a34a;
+  --btn-bg: #1a1714;
+  --nav-w: 240px;
+  --header-h: 64px;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-hover: 0 8px 30px rgba(0,0,0,0.14);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ══ TOP HEADER ══ */
+.top-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--surface);
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 200;
+  gap: 16px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 36px; height: 36px;
+  background: var(--btn-bg);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.logo-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.logo-text em { font-style: normal; color: var(--accent-blue); }
+
+/* Header Center Nav */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+
+.header-nav a {
+  font-size: 0.855rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 13px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.header-nav a:hover { background: var(--bg); color: var(--text-primary); }
+.header-nav a.active { background: #eff4ff; color: var(--accent-blue); font-weight: 600; }
+
+/* Header Right */
+.header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.search-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.search-btn:hover { background: var(--bg); color: var(--text-primary); }
+.search-btn svg { width: 15px; height: 15px; }
+
+.cart-btn {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--btn-bg); color: #fff;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.cart-btn:hover { background: #333; }
+.cart-btn svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.cart-badge {
+  background: var(--accent-blue); color: #fff;
+  font-size: 0.62rem; font-weight: 700;
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none;
+  cursor: pointer; padding: 6px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.hamburger:hover { background: var(--bg); }
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text-primary); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ══ LAYOUT ══ */
+.layout { display: flex; padding-top: var(--header-h); min-height: 100vh; }
+
+/* ══ SIDE NAV ══ */
+.side-nav {
+  position: fixed;
+  top: var(--header-h); left: 0;
+  width: var(--nav-w);
+  height: calc(100vh - var(--header-h));
+  background: var(--surface);
+  border-right: 1.5px solid var(--border);
+  overflow-y: auto;
+  padding: 20px 12px 40px;
+  display: flex; flex-direction: column; gap: 2px;
+  z-index: 150;
+  transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+}
+
+.side-nav-label {
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 10px; margin: 14px 0 5px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.865rem; font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 9px 12px; border-radius: 9px;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.nav-item svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
+.nav-item:hover { background: var(--bg); color: var(--text-primary); }
+.nav-item.active { background: #eff4ff; color: var(--accent-blue); font-weight: 600; }
+.nav-item.active svg { opacity: 1; }
+
+.nav-count {
+  margin-left: auto; font-size: 0.65rem; font-weight: 700;
+  background: var(--accent-blue); color: #fff;
+  padding: 1px 7px; border-radius: 20px;
+}
+
+.nav-divider { height: 1px; background: var(--border); margin: 10px 4px; }
+
+/* Overlay */
+.side-nav-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 140;
+}
+
+/* ══ MAIN CONTENT ══ */
+.main-content {
+  margin-left: var(--nav-w);
+  flex: 1; padding: 34px 26px 80px;
+  min-width: 0;
+}
+
+.page-title-row {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 20px; flex-wrap: wrap;
+}
+
+.page-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.55rem;
+  letter-spacing: -0.03em;
+}
+
+.page-count { font-size: 0.875rem; color: var(--text-muted); }
+
+/* Filter Strip */
+.filter-strip { display: flex; gap: 7px; margin-bottom: 22px; flex-wrap: wrap; }
+
+.pill {
+  font-size: 0.78rem; font-weight: 500;
+  padding: 5px 14px; border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--surface); color: var(--text-secondary);
+  cursor: pointer; transition: all 0.15s;
+}
+.pill:hover { border-color: #b5b0aa; color: var(--text-primary); }
+.pill.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+
+/* ══ PRODUCT GRID ══ */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #c8c2ba; }
+.card.featured { border-color: var(--accent-blue); border-width: 2px; }
+
+.tag {
+  display: inline-flex; align-items: center;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 4px; width: fit-content;
+}
+.tag-ebook     { background:#dbeafe; color:#1e40af; }
+.tag-toolkit   { background:#f3e8ff; color:#6b21a8; }
+.tag-sqa       { background:#fef3c7; color:#92400e; }
+.tag-checklist { background:#ffedd5; color:#9a3412; }
+.tag-interview { background:#dcfce7; color:#166534; }
+.tag-clone     { background:#fce7f3; color:#9d174d; }
+.tag-manual    { background:#e0f2fe; color:#075985; }
+.tag-ai        { background:#f0fdf4; color:#166534; }
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 1rem; line-height: 1.3;
+}
+.card-desc {
+  font-size: 0.83rem; color: var(--text-secondary);
+  line-height: 1.55; flex: 1;
+}
+.card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 10px;
+  margin-top: 4px; flex-wrap: wrap;
+}
+.price {
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.9rem; color: var(--accent-blue);
+  background: #eff4ff; padding: 4px 12px; border-radius: 6px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem; font-weight: 500;
+  padding: 7px 14px; border-radius: 8px;
+  border: none; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--btn-bg); color: #fff; }
+.btn-primary:hover { background: #333; transform: scale(1.02); }
+.btn-added { background: #f0fdf4; color: var(--accent-green); border: 1.5px solid #bbf7d0; }
+
+/* ══ FOOTER ══ */
+.site-footer {
+  background: var(--text-primary); color: #9ca3af;
+  padding: 48px 20px 36px;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap;
+}
+.footer-brand h2 {
+  font-family: 'Syne', sans-serif; font-size: 1.05rem;
+  font-weight: 700; color: #fff; margin-bottom: 8px;
+}
+.footer-brand p { font-size: 0.82rem; max-width: 220px; line-height: 1.5; }
+.footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
+.footer-col h3 {
+  font-family: 'Syne', sans-serif; font-size: 0.68rem;
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #fff; margin-bottom: 14px;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul li a { font-size: 0.85rem; color: #9ca3af; text-decoration: none; transition: color 0.15s; }
+.footer-col ul li a:hover { color: #fff; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 768px) {
+  .side-nav { transform: translateX(-100%); }
+  .side-nav.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.12); }
+  .side-nav-overlay.open { display: block; }
+  .main-content { margin-left: 0; padding: 22px 16px 60px; }
+  .header-nav { display: none; }
+  .hamburger { display: flex; }
+  .cart-label { display: none; }
+}
+
+@media (max-width: 520px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .top-header { padding: 0 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="top-header">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <a href="#" class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="logo-text">store.<em>galib</em>.dev</div>
+  </a>
+
+  <nav class="header-nav">
+    <a href="#" class="active">Shop</a>
+    <a href="#">Bundles</a>
+    <a href="#">Roadmap</a>
+    <a href="#">Blog</a>
+    <a href="#">About</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="search-btn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+    <button class="cart-btn">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-label">Cart</span>
+      <span class="cart-badge">2</span>
+    </button>
+  </div>
+</header>
+
+<!-- Overlay -->
+<div class="side-nav-overlay" id="overlay"></div>
+
+<div class="layout">
+
+  <!-- ══ SIDE NAV ══ -->
+  <aside class="side-nav" id="sideNav">
+    <div class="side-nav-label">Browse</div>
+    <a class="nav-item active" href="#">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      All Products <span class="nav-count">8</span>
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Ebooks
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      Toolkits
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Checklists
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Interview Prep
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      AI Prompts
+    </a>
+
+    <div class="nav-divider"></div>
+
+    <div class="side-nav-label">Price</div>
+    <a class="nav-item" href="#">Under BDT 100</a>
+    <a class="nav-item" href="#">BDT 100 – 200</a>
+    <a class="nav-item" href="#">BDT 200+</a>
+
+    <div class="nav-divider"></div>
+
+    <div class="side-nav-label">Account</div>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      My Account
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Support
+    </a>
+  </aside>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="main-content">
+    <div class="page-title-row">
+      <h1 class="page-title">All Products</h1>
+      <span class="page-count">8 resources</span>
+    </div>
+
+    <div class="filter-strip">
+      <button class="pill active">All</button>
+      <button class="pill">Ebook</button>
+      <button class="pill">SQA</button>
+      <button class="pill">Toolkit</button>
+      <button class="pill">Interview</button>
+      <button class="pill">AI Prompts</button>
+    </div>
+
+    <section class="product-grid">
+      <article class="card">
+        <span class="tag tag-ebook">Ebook</span>
+        <h2 class="card-title">Chrome DevTools Mastery</h2>
+        <p class="card-desc">সঠিক কাজ করতে পেরো, দেখ কার বিয়ার ভেঙে গুলঞ্জি মুন্টা কাজ আগ্রহন পাচ্ছিলে? যদি তুমি নিজে নতুন হান, তাহলে আগামীর ডিভেলপার তৈরি করো।</p>
+        <div class="card-footer">
+          <span class="price">BDT 190</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag tag-toolkit">Toolkit</span>
+        <h2 class="card-title">The Ultimate Software Success Tools</h2>
+        <p class="card-desc">Uber, Amazon বা Spotify-এর মতো জনপ্রিয় সফটওয়্যার ডিজাইন কাজ সেখে নে কেন কোড করা হয় সেটা আদতে বুঝে নাও টুলগুলো।</p>
+        <div class="card-footer">
+          <span class="price">BDT 350</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="card featured">
+        <span class="tag tag-sqa">SQA</span>
+        <h2 class="card-title">Brutal SQA: 84 Killer Tests</h2>
+        <p class="card-desc">আসলে কি সত্যি ট্রিক করে কোন ওয়েব পেজ? প্র্যাক্টিস নিয়েও তখনকার কেটে আলাদা পরিষ্কার সূত্রের টেস্ট দিয়ে আমার পুরনো যে থা।</p>
+        <div class="card-footer">
+          <span class="price">BDT 299</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag tag-checklist">Checklist</span>
+        <h2 class="card-title">Auth & Payment Testing Checklists</h2>
+        <p class="card-desc">নিজে বড় মাপের ইন্টিগ্রেশন বাদি দিতেছেন, অথচ Payment Gateway-এর একটু কাজ করে কোন দিন রাতে রাতটা নিজে বার কীভাবে ব্যর্থ হবে?</p>
+        <div class="card-footer">
+          <span class="price">BDT 100</span>
+          <button class="btn btn-added">✓ Added</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag tag-interview">Interview</span>
+        <h2 class="card-title">SQA Interview Cracker</h2>
+        <p class="card-desc">আপনার ক্যারিয়ার লাইনে সাপোর্টে কাজ করতে যাবেন, আপনাকে তখন "আপনার আলামান্দ সাড়া দেন যে যোগাযোগ করব" বলে বোঝার মতো লোক মিলবে কি না?</p>
+        <div class="card-footer">
+          <span class="price">BDT 49</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag tag-clone">Clone</span>
+        <h2 class="card-title">Clone Application Testing & Feature Pack</h2>
+        <p class="card-desc">Uber, Amazon, Spotify-এর মতো জনপ্রিয় অ্যাপ্লিকেশন থেকে নিছের ক্লোন করে কীভাবে টেস্ট করে পূরণ বাড়ে, তাকে ফিচার দেয়া যায়।</p>
+        <div class="card-footer">
+          <span class="price">BDT 130</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag tag-manual">Manual</span>
+        <h2 class="card-title">TypeWise Product Brainbook</h2>
+        <p class="card-desc">Ecommerce, SaaS, Banking, ERP, POS, AI — সব ডোমেইনের ৬,০০০+ টাকা রাখা ডিভেলপার কীভাবে করো, একটিকে পাবলিশ করে ম্যানু ভেঙে করা হয়েছে।</p>
+        <div class="card-footer">
+          <span class="price">BDT 130</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="tag tag-ai">AI Prompts</span>
+        <h2 class="card-title">120 Engineering Lead Prompts</h2>
+        <p class="card-desc">যখন কোথায় জীবন বদলানোর অ্যাক্টিভেশন আসে? এই ৮০টি স্ট্যাটেজি ডিজাইন করো পরিষ্কার লীড কনফার্মেশন দিয়ে আপনার নিজের বিবর্তনের প্রমাণ পেতে।</p>
+        <div class="card-footer">
+          <span class="price">BDT 39</span>
+          <button class="btn btn-primary">+ Add to Cart</button>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h2>store.galib.dev</h2>
+      <p>Curated engineering resources for professionals who refuse to stay average.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="#">WhatsApp Support</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const sideNav   = document.getElementById('sideNav');
+  const overlay   = document.getElementById('overlay');
+
+  function toggleNav() {
+    const open = sideNav.classList.toggle('open');
+    overlay.classList.toggle('open', open);
+    hamburger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', toggleNav);
+  overlay.addEventListener('click', toggleNav);
+
+  document.querySelectorAll('.pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

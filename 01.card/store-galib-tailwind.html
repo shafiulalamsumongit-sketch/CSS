@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>store.galib.dev — Tailwind Version</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          syne: ['Syne', 'sans-serif'],
+          dm: ['DM Sans', 'sans-serif'],
+        },
+        colors: {
+          sand: '#f5f3ee',
+          ink: '#1a1714',
+        },
+        spacing: {
+          'header': '64px',
+          'sidenav': '240px',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'DM Sans', sans-serif; }
+  .font-syne { font-family: 'Syne', sans-serif; }
+  .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .card:hover { transform: translateY(-3px); }
+  .side-nav-tw { transition: transform 0.28s cubic-bezier(.4,0,.2,1); }
+  .ham-line { transition: transform 0.25s, opacity 0.25s; }
+</style>
+</head>
+<body class="bg-sand text-ink min-h-screen" style="background:#f5f3ee;">
+
+<!-- ══ HEADER ══ -->
+<header class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-[#e2ddd6] flex items-center justify-between px-5 z-[200] gap-4">
+
+  <!-- Hamburger (mobile only) -->
+  <button id="hamburger" aria-label="Toggle menu"
+    class="flex md:hidden flex-col gap-[5px] p-1.5 rounded-lg hover:bg-[#f5f3ee] transition-colors">
+    <span class="ham-line block w-[22px] h-0.5 bg-ink rounded-sm"></span>
+    <span class="ham-line block w-[22px] h-0.5 bg-ink rounded-sm"></span>
+    <span class="ham-line block w-[22px] h-0.5 bg-ink rounded-sm"></span>
+  </button>
+
+  <!-- Logo -->
+  <a href="#" class="flex items-center gap-2.5 flex-shrink-0 no-underline">
+    <div class="w-9 h-9 bg-ink rounded-[10px] flex items-center justify-center">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    </div>
+    <span class="font-syne font-extrabold text-[1rem] tracking-tight text-ink leading-none">
+      store.<span class="text-blue-600">galib</span>.dev
+    </span>
+  </a>
+
+  <!-- Center Nav (desktop) -->
+  <nav class="hidden md:flex items-center gap-0.5 flex-1 justify-center">
+    <a href="#" class="text-[0.855rem] font-medium px-3 py-1.5 rounded-lg bg-[#eff4ff] text-blue-600 font-semibold">Shop</a>
+    <a href="#" class="text-[0.855rem] font-medium px-3 py-1.5 rounded-lg text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">Bundles</a>
+    <a href="#" class="text-[0.855rem] font-medium px-3 py-1.5 rounded-lg text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">Roadmap</a>
+    <a href="#" class="text-[0.855rem] font-medium px-3 py-1.5 rounded-lg text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">Blog</a>
+    <a href="#" class="text-[0.855rem] font-medium px-3 py-1.5 rounded-lg text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">About</a>
+  </nav>
+
+  <!-- Right Actions -->
+  <div class="flex items-center gap-2.5 flex-shrink-0">
+    <button aria-label="Search"
+      class="w-9 h-9 flex items-center justify-center rounded-lg border border-[#e2ddd6] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+    <button class="flex items-center gap-1.5 bg-ink text-white text-[0.82rem] font-medium px-4 py-2 rounded-[9px] hover:bg-[#333] transition-colors">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span class="hidden sm:inline">Cart</span>
+      <span class="bg-blue-600 text-white text-[0.62rem] font-bold w-[17px] h-[17px] rounded-full flex items-center justify-center">2</span>
+    </button>
+  </div>
+</header>
+
+<!-- Overlay -->
+<div id="overlay" class="hidden fixed inset-0 bg-black/35 z-[140]"></div>
+
+<!-- ══ LAYOUT ══ -->
+<div class="flex pt-16 min-h-screen">
+
+  <!-- ══ SIDE NAV ══ -->
+  <aside id="sideNav"
+    class="side-nav-tw fixed top-16 left-0 w-[240px] h-[calc(100vh-64px)] bg-white border-r border-[#e2ddd6] overflow-y-auto px-3 py-5 flex flex-col gap-0.5 z-[150] -translate-x-full md:translate-x-0">
+
+    <p class="text-[0.61rem] font-bold tracking-[0.1em] uppercase text-[#a09890] px-2.5 mt-2 mb-1.5">Browse</p>
+
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-semibold px-3 py-2 rounded-[9px] bg-[#eff4ff] text-blue-600">
+      <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      All Products
+      <span class="ml-auto bg-blue-600 text-white text-[0.61rem] font-bold px-1.5 py-0.5 rounded-full">8</span>
+    </a>
+
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+      Ebooks
+    </a>
+
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+      </svg>
+      Toolkits
+    </a>
+
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+      </svg>
+      Checklists
+    </a>
+
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+      </svg>
+      Interview Prep
+    </a>
+
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+      AI Prompts
+    </a>
+
+    <hr class="my-2.5 border-[#e2ddd6]"/>
+
+    <p class="text-[0.61rem] font-bold tracking-[0.1em] uppercase text-[#a09890] px-2.5 mb-1.5">Price</p>
+    <a href="#" class="text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">Under BDT 100</a>
+    <a href="#" class="text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">BDT 100 – 200</a>
+    <a href="#" class="text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">BDT 200+</a>
+
+    <hr class="my-2.5 border-[#e2ddd6]"/>
+
+    <p class="text-[0.61rem] font-bold tracking-[0.1em] uppercase text-[#a09890] px-2.5 mb-1.5">Account</p>
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+      My Account
+    </a>
+    <a href="#" class="flex items-center gap-2.5 text-[0.865rem] font-medium px-3 py-2 rounded-[9px] text-[#6b6560] hover:bg-[#f5f3ee] hover:text-ink transition-colors">
+      <svg class="w-4 h-4 opacity-75 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Support
+    </a>
+  </aside>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="flex-1 md:ml-[240px] px-4 sm:px-7 pt-8 pb-20 min-w-0">
+
+    <!-- Title row -->
+    <div class="flex items-baseline gap-3 mb-5 flex-wrap">
+      <h1 class="font-syne font-extrabold text-[1.55rem] tracking-tight">All Products</h1>
+      <span class="text-[0.875rem] text-[#a09890]">8 resources</span>
+    </div>
+
+    <!-- Filter pills -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <button onclick="setPill(this)" class="pill-btn text-[0.78rem] font-medium px-3.5 py-1 rounded-full border-[1.5px] bg-ink text-white border-ink">All</button>
+      <button onclick="setPill(this)" class="pill-btn text-[0.78rem] font-medium px-3.5 py-1 rounded-full border-[1.5px] border-[#e2ddd6] bg-white text-[#6b6560] hover:border-[#b5b0aa] hover:text-ink transition-colors">Ebook</button>
+      <button onclick="setPill(this)" class="pill-btn text-[0.78rem] font-medium px-3.5 py-1 rounded-full border-[1.5px] border-[#e2ddd6] bg-white text-[#6b6560] hover:border-[#b5b0aa] hover:text-ink transition-colors">SQA</button>
+      <button onclick="setPill(this)" class="pill-btn text-[0.78rem] font-medium px-3.5 py-1 rounded-full border-[1.5px] border-[#e2ddd6] bg-white text-[#6b6560] hover:border-[#b5b0aa] hover:text-ink transition-colors">Toolkit</button>
+      <button onclick="setPill(this)" class="pill-btn text-[0.78rem] font-medium px-3.5 py-1 rounded-full border-[1.5px] border-[#e2ddd6] bg-white text-[#6b6560] hover:border-[#b5b0aa] hover:text-ink transition-colors">Interview</button>
+      <button onclick="setPill(this)" class="pill-btn text-[0.78rem] font-medium px-3.5 py-1 rounded-full border-[1.5px] border-[#e2ddd6] bg-white text-[#6b6560] hover:border-[#b5b0aa] hover:text-ink transition-colors">AI Prompts</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <!-- Card 1 -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-blue-100 text-blue-700 px-2.5 py-0.5 rounded">Ebook</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">Chrome DevTools Mastery</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">সঠিক কাজ করতে পেরো, দেখ কার বিয়ার ভেঙে গুলঞ্জি মুন্টা কাজ আগ্রহন পাচ্ছিলে? যদি তুমি নিজে নতুন হান, তাহলে আগামীর ডিভেলপার তৈরি করো।</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 190</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-purple-100 text-purple-700 px-2.5 py-0.5 rounded">Toolkit</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">The Ultimate Software Success Tools</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">Uber, Amazon বা Spotify-এর মতো জনপ্রিয় সফটওয়্যার ডিজাইন কাজ সেখে নে কেন কোড করা হয় সেটা আদতে বুঝে নাও টুলগুলো।</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 350</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <!-- Card 3 (featured) -->
+      <article class="card bg-white border-2 border-blue-500 rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded">SQA</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">Brutal SQA: 84 Killer Tests</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">আসলে কি সত্যি ট্রিক করে কোন ওয়েব পেজ? প্র্যাক্টিস নিয়েও তখনকার কেটে আলাদা পরিষ্কার সূত্রের টেস্ট দিয়ে আমার পুরনো যে থা।</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 299</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <!-- Card 4 (Added) -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-orange-100 text-orange-700 px-2.5 py-0.5 rounded">Checklist</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">Auth & Payment Testing Checklists</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">নিজে বড় মাপের ইন্টিগ্রেশন বাদি দিতেছেন, অথচ Payment Gateway-এর একটু কাজ করে কোন দিন রাতে রাতটা নিজে বার কীভাবে ব্যর্থ হবে?</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 100</span>
+          <button class="flex items-center gap-1.5 bg-green-50 text-green-700 border border-green-200 text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg">✓ Added</button>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-green-100 text-green-700 px-2.5 py-0.5 rounded">Interview</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">SQA Interview Cracker</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">আপনার ক্যারিয়ার লাইনে সাপোর্টে কাজ করতে যাবেন, আপনাকে তখন "আপনার আলামান্দ সাড়া দেন যে যোগাযোগ করব" বলে বোঝার মতো লোক মিলবে কি না?</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 49</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-pink-100 text-pink-700 px-2.5 py-0.5 rounded">Clone</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">Clone Application Testing & Feature Pack</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">Uber, Amazon, Spotify-এর মতো জনপ্রিয় অ্যাপ্লিকেশন থেকে নিছের ক্লোন করে কীভাবে টেস্ট করে পূরণ বাড়ে, তাকে ফিচার দেয়া যায়।</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 130</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <!-- Card 7 -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-sky-100 text-sky-700 px-2.5 py-0.5 rounded">Manual</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">TypeWise Product Brainbook</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">Ecommerce, SaaS, Banking, ERP, POS, AI — সব ডোমেইনের ৬,০০০+ টাকা রাখা ডিভেলপার কীভাবে করো, একটিকে পাবলিশ করে ম্যানু ভেঙে করা হয়েছে।</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 130</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+      <!-- Card 8 -->
+      <article class="card bg-white border border-[#e2ddd6] rounded-2xl p-5 flex flex-col gap-2.5 shadow-sm hover:shadow-xl">
+        <span class="self-start text-[0.62rem] font-bold tracking-[0.09em] uppercase bg-emerald-100 text-emerald-700 px-2.5 py-0.5 rounded">AI Prompts</span>
+        <h2 class="font-syne font-bold text-[1rem] leading-snug">120 Engineering Lead Prompts</h2>
+        <p class="text-[0.83rem] text-[#6b6560] leading-relaxed flex-1">যখন কোথায় জীবন বদলানোর অ্যাক্টিভেশন আসে? এই ৮০টি স্ট্যাটেজি ডিজাইন করো পরিষ্কার লীড কনফার্মেশন দিয়ে আপনার নিজের বিবর্তনের প্রমাণ পেতে।</p>
+        <div class="flex items-center justify-between gap-2 flex-wrap mt-1">
+          <span class="font-syne font-bold text-[0.9rem] text-blue-600 bg-blue-50 px-3 py-1 rounded-md">BDT 39</span>
+          <button class="flex items-center gap-1.5 bg-ink text-white text-[0.8rem] font-medium px-3.5 py-1.5 rounded-lg hover:bg-[#333] transition-colors">+ Add to Cart</button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="bg-[#1a1714] text-gray-400 px-5 pt-12 pb-9">
+  <div class="max-w-5xl mx-auto flex flex-wrap justify-between gap-10">
+    <div class="max-w-xs">
+      <h2 class="font-syne font-bold text-white text-[1.05rem] mb-2">store.galib.dev</h2>
+      <p class="text-sm leading-relaxed">Curated engineering resources for professionals who refuse to stay average.</p>
+    </div>
+    <div class="flex gap-12 flex-wrap">
+      <div>
+        <h3 class="font-syne font-bold text-white text-[0.68rem] tracking-widest uppercase mb-4">Legal</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm hover:text-white transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="text-sm hover:text-white transition-colors">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-syne font-bold text-white text-[0.68rem] tracking-widest uppercase mb-4">Connect</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm hover:text-white transition-colors">WhatsApp Support</a></li>
+          <li><a href="#" class="text-sm hover:text-white transition-colors">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const sideNav   = document.getElementById('sideNav');
+  const overlay   = document.getElementById('overlay');
+  const lines     = hamburger.querySelectorAll('.ham-line');
+
+  function toggleNav() {
+    const isOpen = !sideNav.classList.contains('-translate-x-full');
+    if (isOpen) {
+      sideNav.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+      lines[0].style.transform = ''; lines[2].style.transform = ''; lines[1].style.opacity = '';
+      document.body.style.overflow = '';
+    } else {
+      sideNav.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+      lines[0].style.transform = 'translateY(7px) rotate(45deg)';
+      lines[1].style.opacity = '0';
+      lines[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  hamburger.addEventListener('click', toggleNav);
+  overlay.addEventListener('click', toggleNav);
+
+  function setPill(el) {
+    document.querySelectorAll('.pill-btn').forEach(p => {
+      p.classList.remove('bg-ink','text-white','border-ink');
+      p.classList.add('bg-white','text-[#6b6560]','border-[#e2ddd6]');
+    });
+    el.classList.add('bg-ink','text-white','border-ink');
+    el.classList.remove('bg-white','text-[#6b6560]','border-[#e2ddd6]');
+  }
+</script>
+</body>
+</html>
